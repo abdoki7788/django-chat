@@ -16,7 +16,7 @@ def index(request):
 @login_required
 def room(request, room_name):
     target_user = User.objects.filter(username=room_name).first()
-    if not target_user:
+    if not target_user or room_name == request.user.username:
         raise Http404
     print(target_user)
     chat = Chat.objects.filter((Q(starter=request.user) | Q(participant=request.user)) & (Q(starter=target_user) | Q(participant=target_user))).first()
