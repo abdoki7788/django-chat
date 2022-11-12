@@ -18,8 +18,14 @@
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
         const addMessage = (message, sender, date) => {
+            let align = "right"
+            let style = "background: lightblue ;"
+            if (sender != user) {
+                align = "left"
+                style = "background: orange ;"
+            }
             let text = `
-                <div align="right" style="background: lightblue ;"> ${message} <br> <span align="left" style="font-size: 0.5rem;">${sender}</span> -- <span align="right" style="font-size: 0.5rem;">${date}</span> </div>
+                <div align=${align} style="${style}"> ${message} <br> <span align="left" style="font-size: 0.5rem;">${sender}</span> -- <span align="right" style="font-size: 0.5rem;">${date}</span> </div>
             `
             document.querySelector('#messages').innerHTML += text
         }
