@@ -15,7 +15,8 @@
                 <div class="header friends_list_header">
                     <a href="{% url 'logout' %}"><div class="log_out_btn">log out</div></a>
                     <div class="icons">
-                        <i class="fa-solid fa-circle-user"></i>
+                        <span class="my_username">{{ request.user.username }}</span>
+                        <img src="{{ request.user.profile_image.url }}" class="my_profile">
                     </div>
                 </div>
                 <div class="header chat_page_header">

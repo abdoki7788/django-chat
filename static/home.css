@@ -365,8 +365,23 @@ i:hover {
 
 .icons {
     display: flex;
+    align-items: center;
 }
 
 .last_message {
     color: #6c6c6c;
+}
+
+.my_username {
+    color: rgb(167, 167, 167);
+    font-family: Ubuntu;
+    margin-right: 1rem;
+}
+
+
+.my_profile {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 100%;
 }
