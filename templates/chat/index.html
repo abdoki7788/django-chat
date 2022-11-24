@@ -1,15 +1,181 @@
-<!-- chat/templates/chat/index.html -->
+{% load static %}
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Rooms</title>
-</head>
-<body>
-    <ul>
-        {% for user in users %}
-            <li><a href="{% url 'chat:room' user.username %}"> {{ user.username }} </a></li>
-        {% endfor %}
-    </ul>
-</body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Messenger</title>
+        <link rel="stylesheet" href="{% static 'home.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css" integrity="sha512-HHsOC+h3najWR7OKiGZtfhFIEzg5VRIPde0kB0bG2QRidTQqf+sbfcxCTB16AcFB93xMjnBIKE29/MjdzXE+qw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <div class="messenger">
+            <div class="headers">
+                <div class="header friends_list_header">
+                    <a href="{% url 'logout' %}"><div class="log_out_btn">log out</div></a>
+                    <div class="icons">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </div>
+                </div>
+                <div class="header chat_page_header">
+                    <div class="user_box">
+                        <div class="user_img"></div>
+                        <div class="user_name">Masocher</div>
+                    </div>
+
+                    <div class="icons">
+                        <i class="fa-solid fa-paperclip"></i>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pages">
+                <div class="friends_list">
+                    <div class="friends_search_box">
+                        <div class="friends_search_box_container">
+                            <form class="friend_input_box">
+                                <input class="friends_search_input" placeholder="Search ..." >
+                            </form>
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+
+                        <div class="icons">
+                            <div class="add_friend"><i class="fa-solid fa-plus"></i></div>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </div>
+                    </div>
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <div class="friends"></div>
+                </div>
+
+                <div class="chat_page">
+                    <div class="messages">
+                        <div class="message_box">
+                            <div class="message friend_message">Hey body ! Whats up ?</div>
+                            <span class="message_date">1/1/2022</span>
+                        </div>
+
+                        <div class="message_box user_message_box">
+                            <div class="message user_message">Where the fucking hell are you ?<br />where are you bro</div>
+                            <span class="message_date">1/1/2022</span>
+                            <i class="fa-solid fa-check check_icon"></i>
+                        </div>
+
+                        <div class="message_box">
+                            <div class="message friend_message">Where the fucking hell are you ?</div>
+                            <span class="message_date">1/1/2022</span>
+                        </div>
+
+                        <div class="message_box">
+                            <div class="message friend_message">Where the fucking hell are youuuuuuuuuuuuuuu ?</div>
+                            <span class="message_date">1/1/2022</span>
+                        </div>
+
+                        <div class="message_box user_message_box">
+                            <div class="message user_message">Where the fucking hell are you ?</div>
+                            <span class="message_date">1/1/2022</span>
+                            <i class="fa-solid fa-check check_icon"></i>
+                        </div>
+
+                        <div class="message_box">
+                            <div class="message friend_message">dadashami</div>
+                            <span class="message_date">1/1/2022</span>
+                        </div>
+
+                        <div class="message_box">
+                            <div class="message friend_message">Hey body ! Whats up ?</div>
+                            <span class="message_date">1/1/2022</span>
+                        </div>
+
+                        <div class="message_box user_message_box">
+                            <div class="message user_message">Where the fucking hell are you ?</div>
+                            <span class="message_date">1/1/2022</span>
+                            <i class="fa-solid fa-check check_icon"></i>
+                        </div>
+
+                        <div class="message_box user_message_box">
+                            <div class="message user_message">Where the fucking hell are you ?</div>
+                            <span class="message_date">1/1/2022</span>
+                            <i class="fa-solid fa-check check_icon"></i>
+                        </div>
+
+                        <div class="message_box">
+                            <div class="message friend_message">Where the fucking hell are you ?</div>
+                            <span class="message_date">1/1/2022</span>
+                        </div>
+
+                        <div class="message_box">
+                            <div class="message friend_message">Where the fucking hell are youuuuuuuuuuuuuuu ?</div>
+                            <span class="message_date">1/1/2022</span>
+                        </div>
+
+                        <div class="message_box user_message_box">
+                            <div class="message user_message">Where the fucking hell are you ?</div>
+                            <span class="message_date">1/1/2022</span>
+                            <i class="fa-solid fa-check check_icon"></i>
+                        </div>
+
+                        <div class="message_box user_message_box">
+                            <div class="message user_message">dadashamiii</div>
+                            <span class="message_date">1/1/2022</span>
+                            <i class="fa-solid fa-check check_icon"></i>
+                        </div>
+
+                        <div class="message_box">
+                            <div class="message friend_message">dadashami</div>
+                            <span class="message_date">1/1/2022</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="search_box">
+                    <div class="emojis"><i class="fa-sharp fa-solid fa-face-laugh"></i></div>
+                    <form class="input_box">
+                        <input class="search_input" placeholder="Type a message">
+                    </form>
+                    <i class="fa-sharp fa-solid fa-paper-plane-top"></i>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let friends_box = document.querySelector('.friends')
+
+            let friends = [
+                { id: 1, name: 'Ebo - 1', last_message: 'Hey body ! Whats up ?', last_message_date: '1/1/2022', class: 'friend' },
+                { id: 2, name: 'Ebo - 2', last_message: 'Hey body ! Whats up ?', last_message_date: '1/1/2022', class: 'friend' },
+                { id: 3, name: 'Ebo - 3', last_message: 'Hey body ! Whats up ?', last_message_date: '1/1/2022', class: 'friend' },
+                { id: 4, name: 'Ebo - 4', last_message: 'Hey body ! Whats up ?', last_message_date: '1/1/2022', class: 'friend' },
+                { id: 5, name: 'Ebo - 5', last_message: 'Hey body ! Whats up ?', last_message_date: '1/1/2022', class: 'friend' },
+                { id: 6, name: 'Ebo - 6', last_message: 'Hey body ! Whats up ?', last_message_date: '1/1/2022', class: 'friend' },
+                { id: 7, name: 'Ebo - 7', last_message: 'Hey body ! Whats up ?', last_message_date: '1/1/2022', class: 'friend' },
+                { id: 8, name: 'Ebo - 8', last_message: 'Hey body ! Whats up ?', last_message_date: '1/1/2022', class: 'friend' },
+                { id: 9, name: 'Ebo - 9', last_message: 'Hey body ! Whats up ?', last_message_date: '1/1/2022', class: 'friend' },
+            ]
+
+            let friendsLooper = () => {
+                friends.forEach(friend => 
+                    friends_box.innerHTML += `
+                        <div class="${ friend.class }" id="${ friend.id }">
+                            <div class="friend_info">
+                                <div class="friend_img"></div>
+                                <div class="friend_box">
+                                    <div class="friend_name">${ friend.name }</div>
+                                    <div class="last_message">${ friend.last_message }</div>
+                                </div>
+                            </div>
+                            <div class="last_chat_date">${ friend.last_message_date }</div>
+                        </div>
+                    `
+                )
+            }
+            
+            friendsLooper()
+        </script>
+    </body>
 </html>

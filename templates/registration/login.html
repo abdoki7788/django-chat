@@ -1,32 +1,26 @@
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+{% load static %}
+{% load widget_tweaks %}
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>sign in</title>
+        <link rel="stylesheet" href="{% static 'sign.css' %}">
+    </head>
+    <body>
+        <div class="title">Sing In</div>
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {% render_field form.username placeholder="username" %}
+            {% render_field form.password placeholder="password" %}
+            <button class="submit_btn" type="submit">submit</button>
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
 
-<input type="submit" value="login">
-<input type="hidden" name="next" value="{{ next }}">
-</form>
-
-{# Assumes you set up the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+        <div class="sign_up_link">have not acount ? <a href="./sign-up.html">sign up</a></div>
+    </body>
+</html>

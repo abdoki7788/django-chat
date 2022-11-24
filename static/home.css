@@ -1,0 +1,372 @@
+@font-face {
+    font-family: 'OpenSans';
+    src: url(./fonts/OpenSans-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url(./fonts/Ubuntu-Medium.ttf);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    user-select: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.messenger {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+.headers {
+    width: 100%;
+    display: flex;
+    height: 12%;
+}
+
+.header {
+    background-color: #1c1c1c;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.friends_list_header {
+    width: calc(30% - 51px);
+    padding: 0 25px;
+    border: solid #303030;
+    border-width: 0 1px 1px 0;
+}
+
+.chat_page_header {
+    width: calc(70% - 70px);
+    padding: 0 35px;
+}
+
+i {
+    color: #9c9c9c;
+    font-size: 18px;
+    margin: 15px;
+    cursor: pointer;
+    transition: .2s;
+}
+i:hover {
+    color: #fff;
+}
+
+.user_box {
+    display: flex;
+    align-items: center;
+    font-family: Ubuntu;
+}
+.user_img, .friend_img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #9c9c9c;
+}
+.friend_img {
+    width: 50px;
+    height: 50px;
+}
+.user_name {
+    color: #fff;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.log_out_btn {
+    background-color: rgb(0, 89, 255);
+    border: 1px solid rgb(0, 89, 255);
+    border-radius: 5px;
+    padding: 8px 15px;
+    color:  #fff;
+    cursor: pointer;
+    transition: .2s;
+    font-family: Ubuntu;
+    font-size: 14px;
+}
+.log_out_btn:hover {
+    background: none;
+    border-color: #fff;
+}
+
+.pages {
+    height: 88%;
+    display: flex;
+}
+
+.friends_list {
+    background-color: #202020;
+    width: calc(30% - 1px);
+    height: calc(100% - 82.5px);
+    border: solid #303030;
+    border-width: 0 1px 0 0;
+    position: relative;
+    padding: 82.5px 0 0 0;
+}
+.friends_search_box {
+    width: calc(100% - 50px);
+    padding: 25px;
+    height: 30px;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: #1c1c1c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: solid #303030;
+    border-width: 1px 0 1px 0;
+}
+.friends_search_box_container {
+    width: 50%;
+    position: relative;
+}
+.friend_input_box {
+    display: flex;
+}
+.friends_search_input {
+    width: calc(100%);
+    padding: 12px 20px 12px 50px;
+    border-radius: 5px;
+    outline: 0;
+    background-color: #303030;
+    border: none;
+    font-family: Ubuntu;
+    color: #eee;
+}
+.fa-magnifying-glass {
+    position: absolute;
+    top: -2px;
+    left: 0px;
+    font-size: 14px;
+}
+
+.chat_page {
+    background-image: url("/static/images/chatpage-background.png");
+    width: calc(70%);
+    height: calc(100% - 120px);
+    border: solid #303030;
+    border-width: 1px 0 0 0;
+}
+.messages {
+    width: calc(100% - 100px);
+    height: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 40px 50px 0 50px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.messages::-webkit-scrollbar {
+    width: 6px;
+    cursor: pointer;
+}
+.messages::-webkit-scrollbar-thumb {
+    background-color: #6c6c6c;
+}
+.messages::-webkit-scrollbar-track {
+    background-color: #303030;
+}
+.message_box {
+    margin-bottom: 45px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+.message {
+    width: fit-content;
+    background-color: #9c9c9c;
+    padding: 15px 20px;
+    border-radius: 20px 20px 0px 20px;
+    font-size: 14px;
+    font-weight: 100;
+    font-family: Ubuntu, Vazir;
+    user-select: text;
+}
+.message::selection {
+    color: #fff;
+    background-color: #303030;
+    font-size: 20px;
+}
+.user_message_box {
+    justify-content: flex-start;
+    position: relative;
+}
+.user_message {
+    background-color: rgb(0, 89, 255);
+    color: #fff;
+    border-radius: 20px 20px 20px 0px;
+}
+.message_date {
+    color: #9c9c9c;
+    font-family: Ubuntu;
+    position: absolute;
+    bottom: -20px;
+    right: 5px;
+    font-size: 12px;
+}
+.user_message_box .message_date {
+    color: #9c9c9c;
+    font-family: Ubuntu;
+    position: absolute;
+    bottom: -20px;
+    left: 5px;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+.check_icon {
+    position: absolute;
+    bottom: -37px;
+    font-size: 13px;
+    z-index: 2;
+    left: 50px;
+    color: #9c9c9c;
+}
+
+.search_box {
+    width: calc(70% - 70px);
+    padding: 0 50px 0 20px;
+    height: 120px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #1c1c1c;
+    border-top: 1px solid #303030;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.input_box {
+    width: 92%;
+}
+.search_input {
+    width: calc(100% - 30px);
+    padding: 13px 20px;
+    border-radius: 5px;
+    outline: 0;
+    margin-left: 40px;
+    background-color: #303030;
+    border: none;
+    font-family: Ubuntu;
+    color: #eee;
+}
+.search_input::selection {
+    background-color: #ccc;
+    color: #000;
+}
+.fa-face-laugh {
+    position: absolute;
+    font-size: 24px;
+    bottom: 32px;
+    left: 20px;
+    transition: .1s ease-out;
+}
+.fa-face-laugh:hover {
+    color: rgb(255, 217, 0);
+    font-size: 28px;
+    left: 18px;
+    bottom: 30.5px;
+}
+
+.fa-circle-user {
+    font-size: 40px;
+}
+
+.fa-gear {
+    font-size: 16px;
+    color: #fff;
+    background-color: rgb(0, 89, 255);
+    padding: 12px;
+    border-radius: 50%;
+    position: fixed;
+    bottom: -5px;
+    left: 0px;
+    border: 1px solid rgb(0, 89, 255);
+}
+.fa-gear:hover {
+    background-color: #1c1c1c;
+    color: #fff;
+    border-color: #fff;
+}
+
+.friends {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.friends::-webkit-scrollbar {
+    width: 5px;
+    cursor: pointer;
+}
+.friends::-webkit-scrollbar-thumb {
+    background-color: #6c6c6c;
+}
+.friends::-webkit-scrollbar-track {
+    background-color: #303030;
+}
+.friend {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 80px);
+    padding: 15px 40px;
+    margin-top: 10px;
+    font-family: Ubuntu;
+    color: #9c9c9c;
+    cursor: pointer;
+}
+.friend:hover {
+    background-color: #1c1c1c;
+}
+.friendshow {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 80px);
+    padding: 15px 40px;
+    margin-top: 10px;
+    font-family: Ubuntu;
+    color: #9c9c9c;
+    cursor: pointer;
+    background-color: #1c1c1c;
+}
+
+.friend_info {
+    display: flex;
+}
+.friend_box {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.last_message {
+    font-size: 14px;
+    margin-top: 5px;
+}
+.last_chat_date {
+    font-size: 12px;
+}
+
+.icons {
+    display: flex;
+}
+
+.last_message {
+    color: #6c6c6c;
+}

@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'OpenSans';
+    src: url(./fonts/OpenSans-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url(./fonts/Ubuntu-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: url(./fonts/Vazir.ttf);
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #121212;
+    user-select: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+input {
+    background-color: #1c1c1c;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: 250px;
+    font-family: Ubuntu;
+    outline-color: #0c0c0c;
+    border: 1px solid #3c3c3c;
+    color: #eee;
+}
+.input::placeholder {
+    color: #fff;
+}
+
+.submit_btn {
+    background-color: rgb(0, 89, 255);
+    border: 1px solid rgb(0, 89, 255);
+    border-radius: 5px;
+    padding: 7px 20px;
+    color:  #fff;
+    cursor: pointer;
+    transition: .2s;
+    margin: 10px auto 0 auto;
+    font-family: Ubuntu;
+}
+.submit_btn:hover {
+    background: none;
+    color: #fff;
+    border-color: #fff;
+}
+
+.title {
+    font-size: 30px;
+    color: rgb(0, 89, 255);
+    font-weight: bold;
+    font-family: OpenSans;
+    margin-bottom: 30px;
+}
+
+.sign_up_link {
+    font-family: Ubuntu;
+    font-size: 12px;
+    color: gray;
+    margin-top: 20px;
+}
+.sign_up_link a {
+    color: rgb(0, 89, 255);
+    border: none;
+    font-size: 12px;
+    text-decoration: none;
+    margin-left: 3px;
+}
