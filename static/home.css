@@ -72,6 +72,7 @@ i:hover {
     width: 45px;
     height: 45px;
     border-radius: 50%;
+    object-fit: cover;
 }
 .friend_img {
     width: 50px;
@@ -136,8 +137,7 @@ i:hover {
     display: flex;
 }
 .friends_search_input {
-    width: calc(100%);
-    padding: 12px 20px 12px 50px;
+    padding: 0px 10px 0px 50px;
     border-radius: 5px;
     outline: 0;
     background-color: #303030;
@@ -147,7 +147,7 @@ i:hover {
 }
 .fa-user-friends {
     position: absolute;
-    top: 1px;
+    top: 0px;
     left: 0px;
     font-size: 14px;
 }
@@ -164,7 +164,6 @@ i:hover {
     height: calc(100% - 40px);
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     padding: 40px 50px 0 50px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -183,6 +182,7 @@ i:hover {
     margin-bottom: 45px;
     width: 100%;
     display: flex;
+
     justify-content: flex-end;
     position: relative;
 }
@@ -215,17 +215,11 @@ i:hover {
     font-family: Ubuntu;
     position: absolute;
     bottom: -20px;
-    right: 5px;
-    font-size: 12px;
-}
-.user_message_box .message_date {
-    color: #9c9c9c;
-    font-family: Ubuntu;
-    position: absolute;
-    bottom: -20px;
-    left: 5px;
     font-size: 10px;
     letter-spacing: 1px;
+}
+.user_message_box .message_date {
+    left: 5px;
 }
 .check_icon {
     position: absolute;
@@ -388,4 +382,7 @@ i:hover {
 .add_friend {
     background: none;
     border: none;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
 }

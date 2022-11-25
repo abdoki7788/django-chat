@@ -1,68 +1,153 @@
+{% load static %}
+{% load friends %}
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
-<body>
-    <div id="messages">
-        {% for message in chat.messages.all %}
-            <div {% if message.sender == request.user %} align="right" style="background: lightblue ;{% else %} align="left" style="background: orange ; {% endif %}"> {{ message.content }} <br> <span align="left" style="font-size: 0.5rem;">{{ message.sender }}</span> -- <span align="right" style="font-size: 0.5rem;">{{ message.send_date }}</span> </div>
-        {% endfor %}
-    </div>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
-    {{ room_name|json_script:"room-name" }}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ room_name }} - Messanger</title>
+        <link rel="stylesheet" href="{% static 'home.css' %}">
+        <link rel="stylesheet" href="{% static 'fonts/all.min.css' %}" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <div class="messenger">
+            <div class="headers">
+                <div class="header friends_list_header">
+                    <a href="{% url 'logout' %}"><div class="log_out_btn">log out</div></a>
+                    <div class="icons">
+                        <span class="my_username">{{ request.user.username }}</span>
+                        <img src="{{ request.user.profile_image.url }}" class="my_profile">
+                    </div>
+                </div>
+                <div class="header chat_page_header">
+                    <div class="user_box">
+                        <img src="{{ chat|target_image:request.user }}" class="user_img"></img>
+                        <div class="user_name">{{ room_name }}</div>
+                    </div>
+
+                    <div class="icons">
+                        <i class="fa-solid fa-paperclip"></i>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pages">
+                <div class="friends_list">
+                    <div class="friends_search_box">
+                        <div class="friends_search_box_container">
+                            <form class="friend_input_box" action="{% url 'chat:add_friend' %}" method="post">
+                                {% csrf_token %}
+                                <input name="name" class="friends_search_input" placeholder="Enter User to Add friends ..." >
+                                <button type="submit" class="add_friend"><i class="fa-solid fa-plus" style="color: rgb(9, 118, 253);"></i></button>
+                            </form>
+                            <i class="fa-solid fa-fas fa-user-friends"></i>
+                        </div>
+
+                        <div class="icons">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </div>
+                    </div>
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <div class="friends">
+                        {% for c in chats %}
+                        <div class="friend" id="{{ c.id }}">
+                            <div class="friend_info">
+                                <img src="{{ c|target_image:request.user }}" class="friend_img"></img>
+                                <div class="friend_box">
+                                    <a href="{% url 'chat:room' c.slug %}" style="color: #9c9c9c;" class="friend_name">{{ c|target_user:request.user }}</a>
+                                    <div class="last_message">{{ c|last_message }}</div>
+                                </div>
+                            </div>
+                            <div class="last_chat_date">{{ chat.get_start_date_formatted }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="chat_page">
+                    <div class="messages">
+                    {% for message in chat.messages.all %}
+                        {% if message.sender == request.user %}
+                        <div class="message_box user_message_box">
+                            <div class="message user_message">{{ message.content }}</div>
+                            <span class="message_date">{{ message.send_date }}</span>
+                            <i class="fa-solid fa-check check_icon"></i>
+                        </div>
+                        {% else %}
+                        <div class="message_box">
+                            <div class="message friend_message">{{ message.content }}</div>
+                            <span class="message_date">{{ message.send_date }}</span>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+
+                <div class="search_box">
+                    <div class="emojis"><i class="fa-sharp fa-solid fa-face-laugh"></i></div>
+                    <form class="input_box" id="message_form">
+                        <input id="chat-message-input" class="search_input" placeholder="Type a message">
+                    </form>
+                    <i class="fa-sharp fa-solid fa-paper-plane-top"></i>
+                </div>
+            </div>
+        </div>
+    </body>
     <script>
         let user = "{{ request.user.username }}"
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
+    
         const addMessage = (message, sender, date) => {
-            let align = "right"
-            let style = "background: lightblue ;"
-            if (sender != user) {
-                align = "left"
-                style = "background: orange ;"
+            let text = ``
+            if (sender == user) {
+                text = `
+                    <div class="message_box user_message_box">
+                        <div class="message user_message">${message}</div>
+                        <span class="message_date">${date}</span>
+                        <i class="fa-solid fa-check check_icon"></i>
+                    </div>
+                `
+            } else {
+                text = `
+                    <div class="message_box">
+                        <div class="message friend_message">${message}</div>
+                        <span class="message_date">${date}</span>
+                    </div>
+                `
             }
-            let text = `
-                <div align=${align} style="${style}"> ${message} <br> <span align="left" style="font-size: 0.5rem;">${sender}</span> -- <span align="right" style="font-size: 0.5rem;">${date}</span> </div>
-            `
-            document.querySelector('#messages').innerHTML += text
+            document.querySelector('.messages').innerHTML += text
         }
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
             + '/ws/chat/'
-            + roomName
+            + {{ chat.slug }}
             + '/'
         );
-
+    
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            console.log(data)
             addMessage(data.message, data.sender, data.date)
             
         };
-
+    
         chatSocket.onclose = function(e) {
             console.error('Chat socket closed unexpectedly');
         };
-
+    
         document.querySelector('#chat-message-input').focus();
-        document.querySelector('#chat-message-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#chat-message-submit').click();
-            }
-        };
-
-        document.querySelector('#chat-message-submit').onclick = function(e) {
+    
+        document.querySelector('#message_form').onsubmit = function(e) {
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
                 'message': message
             }));
             messageInputDom.value = '';
+            e.preventDefault()
         };
     </script>
-</body>
 </html>

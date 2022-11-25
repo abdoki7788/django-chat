@@ -15,10 +15,9 @@ def index(request):
 @login_required
 def room(request, slug):
     chat = get_object_or_404(Chat, slug=slug)
-    print(chat)
+    chats = Chat.objects.filter(Q(participant=request.user) | Q(starter=request.user))
     target_user = chat.get_target_user(request.user)
-    print(target_user)
-    return render(request, "chat/room.html", {"room_name": target_user.username, 'chat': chat})
+    return render(request, "chat/room.html", {"room_name": target_user.username, 'chat': chat, 'chats': chats})
 
 @login_required
 def add_friend(request):

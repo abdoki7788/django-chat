@@ -8,10 +8,11 @@ from .models import Message, Chat, User
 class ChatConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def get_chat_room(self):
-        return Chat.objects.filter((Q(starter=self.scope['user']) | Q(participant=self.scope['user'])) & (Q(starter=self.target_user) | Q(participant=self.target_user))).first()
+        return Chat.objects.filter(slug=self.scope['url_route']['kwargs']['slug']).first()
     @database_sync_to_async
     def get_target_user(self):
-        return User.objects.filter(username=self.scope['url_route']['kwargs']['room_name']).first()
+        chat = Chat.objects.filter(slug=self.scope['url_route']['kwargs']['slug']).first()
+        return chat.get_target_user(self.scope['user'])
     @database_sync_to_async
     def create_message(self, message): 
         return Message.objects.create(content=message, sender=self.scope['user'], receiver=self.target_user, chat=self.target_chat)
@@ -20,10 +21,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         if not self.scope['user'].is_authenticated:
             print('not authenticated')
             await self.close()
-        self.room_name = self.scope['url_route']['kwargs']['room_name']
+        self.room_name = self.scope['url_route']['kwargs']['slug']
         self.target_user = await self.get_target_user()
         self.target_chat = await self.get_chat_room()
-        self.room_group_name = f"chat_{str(self.target_chat.id)}"
+        self.room_group_name = f"chat_{str(self.room_name)}"
 
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
