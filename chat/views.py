@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -19,3 +19,13 @@ def room(request, slug):
     target_user = chat.get_target_user(request.user)
     print(target_user)
     return render(request, "chat/room.html", {"room_name": target_user.username, 'chat': chat})
+
+@login_required
+def add_friend(request):
+    if request.method == 'POST':
+        user = User.objects.filter(username=request.POST['name']).first()
+        if user and not Chat.objects.filter((Q(starter=user) | Q(participant=user)) & (Q(starter=request.user) | Q(participant=request.user))):
+            chat = Chat.objects.create(starter=request.user, participant=user)
+            return redirect("chat:room", slug=str(chat.slug))
+        else:
+            return redirect("chat:index")

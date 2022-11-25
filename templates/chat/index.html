@@ -37,8 +37,9 @@
                 <div class="friends_list">
                     <div class="friends_search_box">
                         <div class="friends_search_box_container">
-                            <form class="friend_input_box">
-                                <input class="friends_search_input" placeholder="Enter User to Add friends ..." >
+                            <form class="friend_input_box" action="{% url 'chat:add_friend' %}" method="post">
+                                {% csrf_token %}
+                                <input name="name" class="friends_search_input" placeholder="Enter User to Add friends ..." >
                                 <button type="submit" class="add_friend"><i class="fa-solid fa-plus" style="color: rgb(9, 118, 253);"></i></button>
                             </form>
                             <i class="fa-solid fa-fas fa-user-friends"></i>
