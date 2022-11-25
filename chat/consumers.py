@@ -36,7 +36,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         message = await self.create_message(content['message'])
         content['sender'] = self.scope['user'].username
         print(message.send_date)
-        content['date'] = str(message.send_date)
+        content['date'] = message.send_date.strftime("%b. %d, %Y, %H:%M %p")
         await self.channel_layer.group_send(self.room_group_name, {'type': 'chat_message', 'message':content})
 
     async def chat_message(self, event):

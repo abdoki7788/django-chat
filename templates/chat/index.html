@@ -61,7 +61,7 @@
                                     <div class="last_message">{{ chat|last_message }}</div>
                                 </div>
                             </div>
-                            <div class="last_chat_date">{{ chat.start_date }}</div>
+                            <div class="last_chat_date">{{ chat.get_start_date_formatted }}</div>
                         </div>
                         {% endfor %}
                     </div>

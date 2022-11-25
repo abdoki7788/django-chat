@@ -18,6 +18,9 @@ class Chat(models.Model):
         elif self.participant == user:
             return self.starter
 
+    def get_start_date_formatted(self):
+        return self.start_date.strftime("%b. %d, %Y, %H:%M %p")
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = randint(1000000000000000, 9999999999999999)
