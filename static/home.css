@@ -154,7 +154,7 @@ i:hover {
 }
 
 .chat_page {
-    background-image: url("/static/images/chatpage-background.png");
+    background-color: rgb(31, 30, 30);
     width: calc(70%);
     height: calc(100% - 120px);
     border: solid #303030;

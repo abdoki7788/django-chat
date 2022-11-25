@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="header chat_page_header">
-                    <div class="user_box">
+                    {% comment %} <div class="user_box">
                         <div class="user_img"></div>
                         <div class="user_name">Masocher</div>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="icons">
                         <i class="fa-solid fa-paperclip"></i>
                         <i class="fa-solid fa-ellipsis"></i>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
             
@@ -53,8 +53,12 @@
                     <div class="friends"></div>
                 </div>
 
-                <div class="chat_page">
-                    <div class="messages">
+                <div class="chat_page" style="height: calc(100% - 1px);" align="center">
+
+                    <i class="fa fa-fas fa-comments" style="font-size: 80px; margin-top: 10rem;"></i>
+                    <h2 style="color: #ccc;">Select A conversation to Start messaging</h2>
+
+                    {% comment %} <div class="messages">
                         <div class="message_box">
                             <div class="message friend_message">Hey body ! Whats up ?</div>
                             <span class="message_date">1/1/2022</span>
@@ -131,16 +135,16 @@
                             <span class="message_date">1/1/2022</span>
                         </div>
 
-                    </div>
+                    </div> {% endcomment %}
                 </div>
 
-                <div class="search_box">
+                {% comment %} <div class="search_box">
                     <div class="emojis"><i class="fa-sharp fa-solid fa-face-laugh"></i></div>
                     <form class="input_box">
                         <input class="search_input" placeholder="Type a message">
                     </form>
                     <i class="fa-sharp fa-solid fa-paper-plane-top"></i>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
 
