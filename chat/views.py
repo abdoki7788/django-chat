@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.http import Http404
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -14,13 +13,9 @@ def index(request):
     return render(request, "chat/index.html", context={"chats": chats})
 
 @login_required
-def room(request, room_name):
-    target_user = User.objects.filter(username=room_name).first()
-    if not target_user or room_name == request.user.username:
-        raise Http404
-    print(target_user)
-    chat = Chat.objects.filter((Q(starter=request.user) | Q(participant=request.user)) & (Q(starter=target_user) | Q(participant=target_user))).first()
+def room(request, slug):
+    chat = get_object_or_404(Chat, slug=slug)
     print(chat)
-    if not chat:
-        chat = Chat.objects.create(starter=request.user, participant=target_user)
-    return render(request, "chat/room.html", {"room_name": room_name, 'chat': chat})
+    target_user = chat.get_target_user(request.user)
+    print(target_user)
+    return render(request, "chat/room.html", {"room_name": target_user.username, 'chat': chat})

@@ -3,10 +3,7 @@ from django import template
 register = template.Library()
 
 def get_target_user(obj, user):
-    if obj.starter == user:
-        return obj.participant
-    elif obj.participant == user:
-        return obj.starter
+    return obj.get_target_user(user)
 
 def get_target_image(obj, user):
     user = get_target_user(obj, user)

@@ -12,6 +12,12 @@ class Chat(models.Model):
     slug = models.SlugField(null=True, blank=True)
     start_date = models.DateTimeField(auto_now_add=True)
 
+    def get_target_user(self, user):
+        if self.starter == user:
+            return self.participant
+        elif self.participant == user:
+            return self.starter
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = randint(1000000000000000, 9999999999999999)

@@ -57,7 +57,7 @@
                             <div class="friend_info">
                                 <img src="{{ chat|target_image:request.user }}" class="friend_img"></img>
                                 <div class="friend_box">
-                                    <div class="friend_name">{{ chat|target_user:request.user }}</div>
+                                    <a href="{% url 'chat:room' chat.slug %}" style="color: #9c9c9c;" class="friend_name">{{ chat|target_user:request.user }}</a>
                                     <div class="last_message">{{ chat|last_message }}</div>
                                 </div>
                             </div>
