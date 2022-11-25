@@ -324,7 +324,7 @@ i:hover {
 .friend {
     display: flex;
     justify-content: space-between;
-    width: calc(100% - 80px);
+    width: calc(100% - 40px);
     padding: 15px 40px;
     margin-top: 10px;
     font-family: Ubuntu;
