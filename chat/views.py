@@ -9,9 +9,9 @@ User = get_user_model()
 
 @login_required
 def index(request):
-    users = User.objects.filter(~Q(id=request.user.id))
+    chats = Chat.objects.filter(Q(participant=request.user) | Q(starter=request.user))
 
-    return render(request, "chat/index.html", context={"users": users})
+    return render(request, "chat/index.html", context={"chats": chats})
 
 @login_required
 def room(request, room_name):

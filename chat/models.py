@@ -10,7 +10,6 @@ class Chat(models.Model):
     participant = models.ForeignKey(User, on_delete=models.CASCADE, related_name='participated_chats')
     start_date = models.DateTimeField(auto_now_add=True)
 
-
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sended_messages')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')

@@ -1,4 +1,5 @@
 {% load static %}
+{% load friends %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -50,7 +51,20 @@
 
                     <i class="fa-solid fa-gear"></i>
 
-                    <div class="friends"></div>
+                    <div class="friends">
+                        {% for chat in chats %}
+                        <div class="friend" id="{{ chat.id }}">
+                            <div class="friend_info">
+                                <img src="{{ chat|target_image:request.user }}" class="friend_img"></img>
+                                <div class="friend_box">
+                                    <div class="friend_name">{{ chat|target_user:request.user }}</div>
+                                    <div class="last_message">{{ chat|last_message }}</div>
+                                </div>
+                            </div>
+                            <div class="last_chat_date">{{ chat.start_date }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
 
                 <div class="chat_page" style="height: calc(100% - 1px);" align="center">
@@ -148,7 +162,7 @@
             </div>
         </div>
 
-        <script>
+        {% comment %} <script>
             let friends_box = document.querySelector('.friends')
 
             let friends = [
@@ -181,6 +195,6 @@
             }
             
             friendsLooper()
-        </script>
+        </script> {% endcomment %}
     </body>
 </html>
