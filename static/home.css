@@ -147,7 +147,7 @@ i:hover {
 }
 .fa-user-friends {
     position: absolute;
-    top: -2px;
+    top: 1px;
     left: 0px;
     font-size: 14px;
 }
@@ -383,4 +383,9 @@ i:hover {
     height: 40px;
     object-fit: cover;
     border-radius: 100%;
+}
+
+.add_friend {
+    background: none;
+    border: none;
 }
