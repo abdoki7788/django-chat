@@ -130,7 +130,6 @@ i:hover {
     border-width: 1px 0 1px 0;
 }
 .friends_search_box_container {
-    width: 50%;
     position: relative;
 }
 .friend_input_box {
@@ -146,7 +145,7 @@ i:hover {
     font-family: Ubuntu;
     color: #eee;
 }
-.fa-magnifying-glass {
+.fa-user-friends {
     position: absolute;
     top: -2px;
     left: 0px;
