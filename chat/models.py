@@ -19,7 +19,7 @@ class Chat(models.Model):
             return self.starter
 
     def get_start_date_formatted(self):
-        return self.start_date.strftime("%b. %d, %Y, %H:%M %p")
+        return self.start_date.strftime("%b. %d, %Y")
 
     def save(self, *args, **kwargs):
         if not self.slug:
