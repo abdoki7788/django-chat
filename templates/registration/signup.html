@@ -1,3 +1,6 @@
+{% load static %}
+{% load widget_tweaks %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,15 +8,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>sign in</title>
-        <link rel="stylesheet" href="sign.css">
+        <link rel="stylesheet" href="{% static 'sign.css' %}">
     </head>
     <body>
         <div class="title">Sign Up</div>
 
-        <form>
-            <input type="text" placeholder="user name" />
-            <input type="password" placeholder="password" />
-            <input type="password" placeholder="repeat password" />
+        <form method="post">
+            {% csrf_token %}
+            {% render_field form.username placeholder="username" %}
+            {% render_field form.password1 placeholder="password" %}
+            {% render_field form.password2 placeholder="repeat password" %}
             <button class="submit_btn" type="submit">submit</button>
         </form>
 

@@ -21,6 +21,6 @@
             <input type="hidden" name="next" value="{{ next }}">
         </form>
 
-        <div class="sign_up_link">have not acount ? <a href="./sign-up.html">sign up</a></div>
+        <div class="sign_up_link">have not acount ? <a href="{% url 'accounts:signup' %}">sign up</a></div>
     </body>
 </html>
